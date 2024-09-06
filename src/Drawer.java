@@ -25,8 +25,10 @@ class Figure {
 
             printCharacter.PrintStar(size);
 
-            System.out.print("\n");
+            System.out.println();
         }
+
+        System.out.println();
     }
 
     public void BlankRect(int size) {
@@ -44,8 +46,10 @@ class Figure {
                 System.out.print("*");
             }
 
-            System.out.print("\n");
+            System.out.println();
         }
+
+        System.out.println();
     }
     
     public void IsoTriangle(int size) {
@@ -64,8 +68,10 @@ class Figure {
                 System.out.print("*");
             }
 
-            System.out.print("\n");
+            System.out.println();
         }
+
+        System.out.println();
     }
 
     public void EmptyTriangle(int size) {
@@ -95,8 +101,10 @@ class Figure {
                 }
             }
             
-            System.out.print("\n");
+            System.out.println();
         }
+
+        System.out.println();
     }
 
     public void RepeatRect(int size, int horiz, int vert) {
@@ -129,10 +137,10 @@ class Figure {
                     }
                 }
 
-                System.out.print("\n");
+                System.out.println();
             }
 
-            System.out.print("\n");
+            System.out.println();
         }
     }
 }
@@ -140,53 +148,33 @@ class Figure {
 public class Drawer {
     public static void main(String[] args) {
 
-        int mode, size;
+        int size;
         int row, column;
 
         Figure figure = new Figure();
 
         try (Scanner scanner = new Scanner(System.in)) {
             
-            System.out.print("Select draw mode... 1. single 2. multiple: ");
+            do {
+                System.out.print("크기를 입력하세요...");
 
-            if (scanner.nextInt() == 1) {
-                // Draw single figure  
-                do {
-                    System.out.print("Select figure... 0. Exit 1. Full rect 2. Empty rect 3. Isotriangle 4. Empty triangle: ");
-                    
-                    mode = scanner.nextInt();
-                    if (mode == 0) break;
-                    
-                    System.out.print("크기를 입력하세요...");
-
-                    size = scanner.nextInt();
-
-                    switch (mode) {
-                        case 1 -> figure.FullRect(size);
-                        case 2 -> figure.BlankRect(size);
-                        case 3 -> figure.IsoTriangle(size);
-                        case 4 -> figure.EmptyTriangle(size);
-                        default -> throw new AssertionError();
-                    }  
-                } while (true);
-            }
-            else {
-                // Draw multiple figure
-                do { 
-                    System.out.print("size = ");
+                size = scanner.nextInt();
                 
-                    size = scanner.nextInt();
+                if (size == 0) break;
 
-                    if (size == 0) break;
-                
-                    System.out.print("가로 세로 박스 수: ");
+                figure.FullRect(size);
+                figure.BlankRect(size);
+                figure.IsoTriangle(size);
+                figure.EmptyTriangle(size);
+
+                System.out.print("가로 세로 박스 수: ");
  
-                    row = scanner.nextInt();
-                    column = scanner.nextInt();
+                row = scanner.nextInt();
+                column = scanner.nextInt();
 
-                    figure.RepeatRect(size, row, column);
-                } while (true);
-            }
+                figure.RepeatRect(size, row, column);
+
+            } while (true);            
 
             System.out.print("안녕히 가세요");
         }
