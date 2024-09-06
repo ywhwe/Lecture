@@ -1,26 +1,36 @@
 import java.util.*;
 
 class Figure {
+
     public void FullRect(int size) {
+
         for (int i = 0; i < size; i++) {
+
             for (int j = 0; j < size; j++) {
                 System.out.print("*");
             }
+
             System.out.print("\n");
         }
     }
 
     public void BlankRect(int size) {
+
         for (int i = 0; i < size; i++) {
+
             if (i == 0 || i == size - 1) {
+
                 for (int j = 0; j < size; j++) {
                     System.out.print("*");
                 }
-            } else {
+            }
+            else {
                 System.out.print("*");
+                
                 for (int j = 1; j < size - 1; j++) {
                     System.out.print(" ");
                 }
+
                 System.out.print("*");
             }
 
@@ -33,16 +43,50 @@ class Figure {
         int counter = size;
 
         for (int i = 0; i < size; i++) {
+            
             counter--;
+            
             for (int j = counter; j > 0; j--) {
                 System.out.print(" ");
             }
 
-            for (int k = 0; k < 2*i-1; k++) {
+            for (int k = 0; k < 2*i+1; k++) {
                 System.out.print("*");
             }
+
             System.out.print("\n");
-        } 
+        }
+    }
+
+    public void EmptyTriangle(int size) {
+        
+        int counter = size;
+
+        for (int i = 0; i < size; i++) {
+            
+            counter--;
+            
+            for (int j = counter; j > 0; j--) {
+                System.out.print(" ");
+            }
+
+            if (!(i == 0 || i == size-1)) {
+                System.out.print("*");
+
+                for (int k = 0; k < 2*i-1; k++) {
+                    System.out.print(" ");
+                }
+
+                System.out.print("*");
+            }
+            else {
+                for (int k = 0; k < 2*i+1; k++) {
+                System.out.print("*");
+                }
+            }
+            
+            System.out.print("\n");
+        }
     }
 
     public void RepeatRect(int size, int horiz, int vert) {
@@ -54,24 +98,31 @@ class Figure {
             row++;
 
             for (int i = 0; i < size; i++) {
+
                 if (i == 0 || i == size-1) {
+
                     for (int j = 0; j < horiz; j++) {
+
                         for (int k = 0; k < size; k++) {
                             System.out.print("*");
                         }
+
                         System.out.print("  ");
                     }
                 }
                 else {
                     for (int j = 0; j < horiz; j++) {
                         System.out.print("*");
+
                         for (int k = 1; k < size-1; k++) {
                             System.out.print(" ");
                         }
+
                         System.out.print("*");
                         System.out.print("  ");
                     }
                 }
+
                 System.out.print("\n");
             }
 
@@ -96,9 +147,10 @@ public class Drawer {
                 
                 size = scanner.nextInt();
                 
-                //figure.FullRect(size); // Draw full rectangle
-                figure.BlankRect(size); // Draw empty rectangle
-                //figure.IsoTriangle(size); // Draw isosceles triangle
+                //figure.FullRect(size);
+                //figure.BlankRect(size);
+                //figure.IsoTriangle(size);
+                figure.EmptyTriangle(size);
                 
             } while (size != 0);*/
 
