@@ -3,9 +3,9 @@ package src.Lecture1;
 import java.nio.charset.Charset;
 import java.util.*;
 
-public class StudentGrade {
+public class GradeManager {
     public static void main(String[] args) {
-        StudentGrade main = new StudentGrade();
+        GradeManager main = new GradeManager();
         main.myMain();
     }
 
@@ -15,6 +15,8 @@ public class StudentGrade {
 
         System.out.print("학생수: ");
         int n = scanner.nextInt();
+
+        boolean exitFlag = false;
 
         students = new Student[n];
         IntArray intArray = new IntArray(n);
@@ -29,9 +31,11 @@ public class StudentGrade {
         }
 
         do {
+            exitFlag = false;
+
             System.out.print("계속하시겠습니까?(y/n)");
 
-            if (!questYesNo(scanner.next())) break;
+            if (!yesCheck(scanner.next())) break;
 
             System.out.print("점수를 수정할 과목 번호 (1)국어 (2)영어 (3)수학 ...");
             int sbjNum = scanner.nextInt();
@@ -40,24 +44,55 @@ public class StudentGrade {
 
             intArray.generate(0, 100);
 
-            System.out.print("점수 반영하시겠습니까? (y/n)");
+            while (!exitFlag) {
+                System.out.print("점수 반영하시겠습니까? (y/n) ");
 
-            if (questYesNo(scanner.next())) {
-                for (int i = 0; i < students.length; i++) {
-                    students[i].revise(sbjNum, intArray.numbers[i]);
-                } // this adjusts new score
-            }
-            else {
-                System.out.print("조정할 점수 구간 최소 최대 ");
-                intArray.generate(scanner.nextInt(), scanner.nextInt());
+                if (yesCheck(scanner.next())) {
+                    System.out.print("(1) 점수 그대로 반영 (2) 높은 점수 반영 ");
+
+                    switch (scanner.nextInt()) {
+                        case 1: for (int i = 0; i < students.length; i++) {
+                                    students[i].revise(sbjNum, intArray.numbers[i]);
+                                }
+                                break;
+                        case 2: for (int i = 0; i < students.length; i++) {
+                                    var highScore = highScore(students[i].score[sbjNum-1], intArray.numbers[i]);
+                                    students[i].revise(sbjNum, highScore);
+                                }
+                                break;
+                    }
+
+                    exitFlag = true;
+                }
+                else {
+                    System.out.print("메뉴 선택 (1) 점수 조정 (2) 다시 생성 (3) 취소/종료 ...");
+
+                    switch (scanner.nextInt()) {
+                        case 1: System.out.print("조정할 점수 구간 최소 최대 ");
+                                intArray.generate(scanner.nextInt(), scanner.nextInt());
+                                break;
+                        case 2: System.out.println(students.length + "명 점수 입력...");
+                                intArray.generate(0, 100);
+                                break;
+                        case 3: System.out.println("점수 수정 취소");
+                                exitFlag = true;
+                                break;
+                    }
+                }
             }
         } while (true);
 
         System.out.print("안녕히 가세요");
+
+        scanner.close();
     }
 
-    boolean questYesNo(String ans) {
+    boolean yesCheck(String ans) {
         return ans.equals("y");
+    }
+
+    int highScore(int origin, int newScore) {
+        return Math.max(origin, newScore);
     }
 }
 
@@ -97,7 +132,9 @@ class Student {
     }
 
     void revise(int num, int newScore) {
-        score[num] = newScore;
+        score[num-1] = newScore;
+
+        print();
     }
 }
 
@@ -114,11 +151,7 @@ class IntArray {
             numbers[i] = rand.nextInt(lower, upper);
             System.out.print(" " + numbers[i]);
         }
+
+        System.out.println();
     }
-
-    void compScore(int origin, int newScore) {
-
-    }
-
-
 }
