@@ -1,4 +1,4 @@
-package Lecture1;
+package src.Lecture1;
 
 import java.util.*;
 

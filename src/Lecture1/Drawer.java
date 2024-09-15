@@ -1,9 +1,9 @@
-package Lecture1;
+package src.Lecture1;
 
 import java.util.*;
 
 class PrintCharacter {
-    
+
     public void PrintBlank(int count) {
         for (int i = 0; i < count; i++) {
             System.out.print(" ");
@@ -42,7 +42,7 @@ class Figure {
             }
             else {
                 System.out.print("*");
-                
+
                 printCharacter.PrintBlank(size-2);
 
                 System.out.print("*");
@@ -53,15 +53,15 @@ class Figure {
 
         System.out.println();
     }
-    
+
     public void IsoTriangle(int size) {
-        
+
         int counter = size;
 
         for (int i = 0; i < size; i++) {
-            
+
             counter--;
-            
+
             for (int j = counter; j > 0; j--) {
                 System.out.print(" ");
             }
@@ -77,13 +77,13 @@ class Figure {
     }
 
     public void EmptyTriangle(int size) {
-        
+
         int counter = size;
 
         for (int i = 0; i < size; i++) {
-            
+
             counter--;
-            
+
             for (int j = counter; j > 0; j--) {
                 System.out.print(" ");
             }
@@ -102,7 +102,7 @@ class Figure {
                 System.out.print("*");
                 }
             }
-            
+
             System.out.println();
         }
 
@@ -110,11 +110,11 @@ class Figure {
     }
 
     public void RepeatRect(int size, int horiz, int vert) {
-        
+
         int row = 0;
 
-        while (row != vert) { 
-            
+        while (row != vert) {
+
             row++;
 
             for (int i = 0; i < size; i++) {
@@ -156,12 +156,12 @@ public class Drawer {
         Figure figure = new Figure();
 
         try (Scanner scanner = new Scanner(System.in)) {
-            
+
             do {
                 System.out.print("크기를 입력하세요...");
 
                 size = scanner.nextInt();
-                
+
                 if (size == 0) break;
 
                 figure.FullRect(size);
@@ -170,13 +170,13 @@ public class Drawer {
                 figure.EmptyTriangle(size);
 
                 System.out.print("가로 세로 박스 수: ");
- 
+
                 row = scanner.nextInt();
                 column = scanner.nextInt();
 
                 figure.RepeatRect(size, row, column);
 
-            } while (true);            
+            } while (true);
 
             System.out.print("안녕히 가세요");
         }
