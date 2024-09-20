@@ -3,6 +3,8 @@ package src.Lecture2;
 import java.util.*;
 
 public class StudentDictionary {
+    ArrayList<Student> studentList = new ArrayList<>();
+
     public static void main(String[] args) {
         StudentDictionary main = new StudentDictionary();
         main.newMain();
@@ -10,8 +12,6 @@ public class StudentDictionary {
 
     public void newMain() {
         Scanner scanner = new Scanner(System.in);
-
-        ArrayList<Student> studentList = new ArrayList<>();
 
         int select;
         String id;
@@ -45,38 +45,62 @@ public class StudentDictionary {
                         }
                         break;
                 case 2: System.out.print("이름: ");
-                        nameSearch(scanner.next(), studentList);
+                        nameSearch(scanner.next());
                         break;
                 case 3: System.out.print("통합검색 키워드: ");
-                        integSearch(scanner.next(), studentList);
+                        integSearch(scanner.next());
                         break;
                 case 4: System.out.print("점수검색 범위:");
-                        scoreSearch(scanner.nextInt(), scanner.nextInt(), studentList);
-                        break;
-            }
+                        scanner.skip("\r\n");
 
-        }
+                        var input = scanner.nextLine().trim();
+                        int min, max;
+
+                        min = Integer.parseInt(input.substring(0, 2).trim());
+
+                        if (input.startsWith("-")) {
+                            max = Integer.parseInt(input.substring(1).trim());
+                            scoreSearch(max, false);
+                        }
+                        else if (input.endsWith("-")) {
+                            scoreSearch(min, true);
+                        }
+                        else {
+                            max = Integer.parseInt(input.substring(2, 5).trim());
+                            scoreSearch(min, max);
+                        }
+                        break;
+            } // End of switch
+        } // End of while
         scanner.close();
     }
 
-    void scoreSearch(int min, int max, ArrayList<Student> list) {
-        for (Student st: list) {
+    void scoreSearch(int min, int max) {
+        for (Student st: studentList) {
             if (st.rangeMatch(min, max)) {
                 st.print();
             }
         }
     }
 
-    void integSearch(String key, ArrayList<Student> list) {
-        for (Student st: list) {
+    void scoreSearch(int num, boolean flag) {
+        for (Student st: studentList) {
+            if (st.rangeMatch(num, flag)) {
+                st.print();
+            }
+        }
+    }
+
+    void integSearch(String key) {
+        for (Student st: studentList) {
             if (st.match(key)) {
                 st.print();
             }
         }
     }
 
-    void nameSearch(String name, ArrayList<Student> list) {
-        for (Student st: list) {
+    void nameSearch(String name) {
+        for (Student st: studentList) {
             if (st.nameMatch(name)) {
                 st.print();
             }
@@ -123,5 +147,10 @@ class Student {
 
     boolean rangeMatch(int min, int max) {
         return score >= min && score < max;
+    }
+
+    boolean rangeMatch(int num, boolean flag) {
+        if (!flag) return score < num;
+        return score >= num;
     }
 }
