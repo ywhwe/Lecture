@@ -13,8 +13,8 @@ public class StudentDictionary {
 
         ArrayList<Student> studentList = new ArrayList<>();
 
-        int grade, score, select = 0;
-        String id, name, phone;
+        int select;
+        String id;
 
         Student student;
 
@@ -45,28 +45,39 @@ public class StudentDictionary {
                         }
                         break;
                 case 2: System.out.print("이름: ");
-                        search(scanner.next(), studentList);
+                        nameSearch(scanner.next(), studentList);
                         break;
                 case 3: System.out.print("통합검색 키워드: ");
-                        search(scanner.next(), studentList);
+                        integSearch(scanner.next(), studentList);
                         break;
                 case 4: System.out.print("점수검색 범위:");
-                break;
+                        scoreSearch(scanner.nextInt(), scanner.nextInt(), studentList);
+                        break;
             }
 
         }
         scanner.close();
     }
 
-    void search(int min, int max, ArrayList<Student> list) {
+    void scoreSearch(int min, int max, ArrayList<Student> list) {
         for (Student st: list) {
-            // TODO range search
+            if (st.rangeMatch(min, max)) {
+                st.print();
+            }
         }
     }
 
-    void search(String key, ArrayList<Student> list) {
+    void integSearch(String key, ArrayList<Student> list) {
         for (Student st: list) {
             if (st.match(key)) {
+                st.print();
+            }
+        }
+    }
+
+    void nameSearch(String name, ArrayList<Student> list) {
+        for (Student st: list) {
+            if (st.nameMatch(name)) {
                 st.print();
             }
         }
@@ -86,11 +97,31 @@ class Student {
     }
 
     void print() {
-        System.out.println(id + " " + name + " " + "(" + grade + " 학년)  " + phone + " - " + score + " 점");
+        System.out.printf("%s %s (%d학년) %s - %d점\n", id, name, grade, phone, score);
+    }
+
+    boolean nameMatch(String key) {
+        return key.equals(name);
     }
 
     boolean match(String key) {
-        if (key.length() <= 3)  return key.equals(name) || grade == Integer.parseInt(key) || score == Integer.parseInt(key);
+        int parsed = 0;
+        try {
+            parsed = Integer.parseInt(key);
+        } catch (NumberFormatException ignored) {
+
+        }
+
+        if (key.length() <= 3)  {
+            if (name.contains(key)) {
+                return true;
+            }
+            else return grade == parsed || score == parsed;
+        }
         return key.equals(id) || key.equals(phone);
+    }
+
+    boolean rangeMatch(int min, int max) {
+        return score >= min && score < max;
     }
 }
