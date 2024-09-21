@@ -2,15 +2,56 @@ package src.Lecture1;
 
 import java.util.*;
 
+public class Drawer {
+
+    public static void main(String[] args) {
+        Drawer drawer = new Drawer();
+        drawer.newMain();
+    }
+
+    public void newMain() {
+        int size;
+        int row, column;
+
+        Figure figure = new Figure();
+
+        try (Scanner scanner = new Scanner(System.in)) {
+
+            do {
+                System.out.print("크기를 입력하세요...");
+
+                size = scanner.nextInt();
+
+                if (size == 0) break;
+
+                figure.FullRect(size);
+                figure.BlankRect(size);
+                figure.IsoTriangle(size);
+                figure.EmptyTriangle(size);
+
+                System.out.print("가로 세로 박스 수: ");
+
+                row = scanner.nextInt();
+                column = scanner.nextInt();
+
+                figure.RepeatRect(size, row, column);
+
+            } while (true);
+
+            System.out.print("안녕히 가세요");
+        }
+    }
+}
+
 class PrintCharacter {
 
-    public void PrintBlank(int count) {
+    void PrintBlank(int count) {
         for (int i = 0; i < count; i++) {
             System.out.print(" ");
         }
     }
 
-    public void PrintStar(int count) {
+    void PrintStar(int count) {
         for (int i = 0; i < count; i++) {
             System.out.print("*");
         }
@@ -99,7 +140,7 @@ class Figure {
             }
             else {
                 for (int k = 0; k < 2*i+1; k++) {
-                System.out.print("*");
+                    System.out.print("*");
                 }
             }
 
@@ -143,42 +184,6 @@ class Figure {
             }
 
             System.out.println();
-        }
-    }
-}
-
-public class Drawer {
-    public static void main(String[] args) {
-
-        int size;
-        int row, column;
-
-        Figure figure = new Figure();
-
-        try (Scanner scanner = new Scanner(System.in)) {
-
-            do {
-                System.out.print("크기를 입력하세요...");
-
-                size = scanner.nextInt();
-
-                if (size == 0) break;
-
-                figure.FullRect(size);
-                figure.BlankRect(size);
-                figure.IsoTriangle(size);
-                figure.EmptyTriangle(size);
-
-                System.out.print("가로 세로 박스 수: ");
-
-                row = scanner.nextInt();
-                column = scanner.nextInt();
-
-                figure.RepeatRect(size, row, column);
-
-            } while (true);
-
-            System.out.print("안녕히 가세요");
         }
     }
 }

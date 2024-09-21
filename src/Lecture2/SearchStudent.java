@@ -2,11 +2,11 @@ package src.Lecture2;
 
 import java.util.*;
 
-public class StudentDictionary {
+public class SearchStudent {
     ArrayList<Student> studentList = new ArrayList<>();
 
     public static void main(String[] args) {
-        StudentDictionary main = new StudentDictionary();
+        SearchStudent main = new SearchStudent();
         main.newMain();
     }
 
