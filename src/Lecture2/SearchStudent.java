@@ -1,6 +1,7 @@
 package src.Lecture2;
 
 import java.util.*;
+import java.nio.charset.Charset;
 
 public class SearchStudent {
     ArrayList<Student> studentList = new ArrayList<>();
@@ -11,7 +12,7 @@ public class SearchStudent {
     }
 
     public void newMain() {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in, Charset.forName("EUC-KR"));
 
         int select;
         String id;
@@ -36,7 +37,9 @@ public class SearchStudent {
 
         while (true) {
             System.out.print("(1)전체검색 (2)이름검색 (3)통합검색 (4)점수검색 (5)종료");
+
             select = scanner.nextInt();
+
             if (select == 5) break;
 
             switch (select) {
@@ -56,17 +59,17 @@ public class SearchStudent {
                         var input = scanner.nextLine().trim();
                         int min, max;
 
-                        min = Integer.parseInt(input.substring(0, 2).trim());
-
                         if (input.startsWith("-")) {
                             max = Integer.parseInt(input.substring(1).trim());
                             scoreSearch(max, false);
                         }
                         else if (input.endsWith("-")) {
+                            min = Integer.parseInt(input.substring(0, 2).trim());
                             scoreSearch(min, true);
                         }
                         else {
                             max = Integer.parseInt(input.substring(2, 5).trim());
+                            min = Integer.parseInt(input.substring(0, 2).trim());
                             scoreSearch(min, max);
                         }
                         break;
@@ -93,18 +96,23 @@ public class SearchStudent {
 
     void integSearch(String key) {
         for (Student st: studentList) {
-            if (st.match(key)) {
+            if (st.keywordMatch(key)) {
                 st.print();
             }
         }
     }
 
     void nameSearch(String name) {
+        int count = 0;
+
         for (Student st: studentList) {
             if (st.nameMatch(name)) {
                 st.print();
+                count++;
             }
         }
+
+        if (count == 0) System.out.println("없는 이름입니다.");
     }
 }
 
@@ -128,8 +136,9 @@ class Student {
         return key.equals(name);
     }
 
-    boolean match(String key) {
+    boolean keywordMatch(String key) {
         int parsed = 0;
+
         try {
             parsed = Integer.parseInt(key);
         } catch (NumberFormatException ignored) {
@@ -140,9 +149,9 @@ class Student {
             if (name.contains(key)) {
                 return true;
             }
-            else return grade == parsed || score == parsed;
+            else return grade == parsed;
         }
-        return key.equals(id) || key.equals(phone);
+        return id.contains(key) || phone.contains(key);
     }
 
     boolean rangeMatch(int min, int max) {
