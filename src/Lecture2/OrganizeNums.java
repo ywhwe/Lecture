@@ -1,7 +1,6 @@
 package src.Lecture2;
 
 import java.util.*;
-import java.util.random.RandomGenerator;
 
 public class OrganizeNums {
     public static void main(String[] args){
