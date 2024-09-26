@@ -42,7 +42,7 @@ public class test {
         System.out.print(indices);*/
     }
 
-    public int[] solution(int[] arr) {
+    public int[] solution1(int[] arr) {
         int[] answer;
         int[] temp = new int[10];
         int count = 0;
@@ -75,7 +75,7 @@ public class test {
         return answer;
     }
 
-    public boolean solution1(int[] arr) {
+    public boolean solution2(int[] arr) {
         boolean answer = true;
 
         int n = arr.length;
@@ -93,6 +93,7 @@ public class test {
         for (int i = 0; i < n; i++) {
             if (arr[i] != i + 1) {
                 answer = false;
+                break;
             }
         }
 
@@ -100,7 +101,7 @@ public class test {
     }
 
     public int[] solution3(long n) {
-        int[] answer = {};
+        int[] answer;
         int temp;
 
         List<Integer> d = new ArrayList<>();
