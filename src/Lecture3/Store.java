@@ -175,7 +175,8 @@ class Item {
 
 class User {
     String id, pw;
-    int sum, point, tmp;
+    int sum, tmp;
+    double point;
 
     ArrayList<Item> basket = new ArrayList<>();
 
@@ -198,10 +199,12 @@ class User {
         for (var item: basket) {
             sum += item.price;
         }
+
+        point = sum * 0.01;
     }
 
     void print() {
-        System.out.printf("[%s] 총구매 %d건 %d원 (%d점)\n", id, basket.size(), sum, point);
+        System.out.printf("[%s] 총구매 %d건 %d원 (%.0f점)\n", id, basket.size(), sum, point);
 
         for (var item : basket) {
                 System.out.printf("%s ", item.name);
