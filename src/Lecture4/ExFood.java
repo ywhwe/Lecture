@@ -12,10 +12,8 @@ public class ExFood extends Food{
 
     @Override
     void read(Scanner scan) {
-        type = scan.next();
-        name = scan.next();
-        unit = scan.next();
-        cal = scan.nextInt();
+        super.read(scan);
+
         amount = scan.nextInt();
         cap = scan.next();
     }
@@ -48,6 +46,6 @@ public class ExFood extends Food{
 
     @Override
     public boolean matches(String name2) {
-        return name.equals(name2);
+        return super.matches(name2);
     }
 }
