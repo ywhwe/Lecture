@@ -31,7 +31,7 @@ public class ExFood extends Food{
 
     @Override
     int getKcal(int n, String u) {
-        return cal * n / amount;
+        return super.getKcal(n, u) / amount;
     }
 
     @Override
