@@ -30,7 +30,7 @@ public class CalorieMain {
 
 	void readFoods() {
 		Scanner inFile = openFile("food2.txt");
-		Food m = null;
+		Food m;
 		int n;
 		while (inFile.hasNext()) {
 			n = inFile.nextInt();
@@ -39,7 +39,12 @@ public class CalorieMain {
 			case 2 -> new ExFood();
 			default -> null;
 			};
-			m.read(inFile);
+
+			if (m == null) {
+				System.out.println("Error occurred");
+				break;
+			}
+            m.read(inFile);
 			foods.add(m);
 		}
 	}
