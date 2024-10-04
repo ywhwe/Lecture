@@ -26,6 +26,8 @@ public class CalorieMain {
 			e.read(inFile);
 			eatList.add(e);
 		}
+
+		inFile.close();
 	}
 
 	void readFoods() {
@@ -39,9 +41,16 @@ public class CalorieMain {
 			case 2 -> new ExFood();
 			default -> null;
 			};
+
+			if (m == null) {
+				System.out.println("Error occurred");
+				break;
+			}
 			m.read(inFile);
 			foods.add(m);
 		}
+
+		inFile.close();
 	}
 
 	void printEats() {

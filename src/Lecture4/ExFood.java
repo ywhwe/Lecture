@@ -3,19 +3,12 @@ package src.Lecture4;
 import java.util.*;
 
 public class ExFood extends Food{
-    String type;
-    String name;
-    String unit;
-    int cal;
     int amount;
     String cap;
 
     @Override
     void read(Scanner scan) {
-        type = scan.next();
-        name = scan.next();
-        unit = scan.next();
-        cal = scan.nextInt();
+        super.read(scan);
         amount = scan.nextInt();
         cap = scan.next();
     }
@@ -29,7 +22,7 @@ public class ExFood extends Food{
 
     @Override
     void printEat(int n, String u) {
-        // 우유 100ml(0kcal) - 125kcal/1개
+        // 우유 100ml(0kcal) - 125kcal/1개(0ml) -> 0kcal*100/0ml=0kcal
         System.out.format("%s %d%s(%dkcal)", name, n, u, getKcal(n, u));
         System.out.format(" - %dkcal/%d%s(%d%s)", cal, 1, unit, amount, cap);
         printDetail(n, u);
@@ -48,6 +41,6 @@ public class ExFood extends Food{
 
     @Override
     public boolean matches(String name2) {
-        return name.equals(name2);
+        return super.matches(name2);
     }
 }
