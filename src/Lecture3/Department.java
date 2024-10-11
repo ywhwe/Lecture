@@ -1,5 +1,7 @@
 package src.Lecture3;
 
+import src.Manager.Manageable;
+
 import java.nio.charset.Charset;
 import java.util.*;
 
@@ -11,6 +13,11 @@ public class Department {
 
     ArrayList<Student> stList = new ArrayList<>();
     ArrayList<Lecture> lecList = new ArrayList<>();
+
+    public static Manageable create() {
+        Manageable m = null;
+        return m;
+    }
 
     void newMain() {
         Scanner scanner = new Scanner(System.in, Charset.forName("EUC-KR"));

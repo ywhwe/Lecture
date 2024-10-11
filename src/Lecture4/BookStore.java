@@ -1,11 +1,13 @@
 package src.Lecture4;
 
-import java.io.*;
+import src.Manager.Factory;
+import src.Manager.Manageable;
+import src.Manager.Manager;
+
 import java.util.*;
 
-public class BookStore {
+public class BookStore extends Manager implements Factory {
     Scanner scan = new Scanner(System.in);
-    ArrayList<Book> bookList = new ArrayList<>();
 
     public static void main(String[] args) {
         BookStore main = new BookStore();
@@ -13,47 +15,26 @@ public class BookStore {
     }
 
     void newMain() {
-        readAllBooks("book2.txt");
-        printAllBooks();
-    }
-    void readAllBooks(String filename) {
-        Scanner filein = openFile(filename);
-        Book b = null;
-        while (filein.hasNext()) {
-            int n = filein.nextInt();
-
-            switch(n) {
-                case 1: b = new Book(); break;
-                case 2: b = new Ebook(); break;
-                default: break;
-            }
-
-            if (b == null) {
-                System.out.println("Error occurred");
-                break;
-            }
-
-            b.read(filein);
-            bookList.add(b);
-        }
-
-        filein.close();
+        readAll("book2.txt", this);
+        printAll();
+        search(scan);
     }
 
-    void printAllBooks() {
-        for(Book b : bookList) {
-            b.print();
-        }
-    }
+    @Override
+    public Manageable create(Scanner filein) {
+        int type = filein.nextInt();
 
-    Scanner openFile(String filename) {
-        Scanner filein = null;
-        try {
-            filein = new Scanner(new File(filename));
-        } catch (IOException e) {
-            System.out.println("File open failed : " + filename);
-            throw new RuntimeException(e);
+        Manageable m = null;
+
+        switch(type) {
+            case 1: m = new Book(); break;
+            case 2: m = new Ebook(); break;
+            case 3: m = new AppendixBook(); break;
+            case 4: m = new Pen(); break;
+            case 5: m = new Tissue(); break;
+            default: break;
         }
-        return filein;
+        
+        return m;
     }
 }

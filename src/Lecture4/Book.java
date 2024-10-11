@@ -1,8 +1,10 @@
 package src.Lecture4;
 
+import src.Manager.Manageable;
+
 import java.util.*;
 
-public class Book {
+public class Book implements Manageable {
     String title;
     String pub;
     String isbn;
@@ -10,7 +12,7 @@ public class Book {
     ArrayList<String> authors = new ArrayList<>();
     int price;
 
-    void read(Scanner scan) {
+    public void read(Scanner scan) {
         title = scan.next();
         pub = scan.next();
         isbn = scan.next();
@@ -25,14 +27,19 @@ public class Book {
         price = scan.nextInt();
     }
 
-    void print() {
-        System.out.printf("%s (%s/%s/%d년)[%d원] 저자:", title, pub, isbn, year, price);
+    String getBookType() {
+        return "[일반책]";
+    }
+
+    public void print() {
+        System.out.printf("%s %s (%s/%s/%d년)[%d원] 저자:",getBookType(), title, pub, isbn, year, price);
         for (String a : authors) {
             System.out.printf(" %s ", a);
         }
         System.out.println();
     }
-    boolean matches(String kwd) {
-        return true;
+
+    public boolean matches(String kwd) {
+        return title.equals(kwd);
     }
 }
