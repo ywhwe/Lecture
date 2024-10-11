@@ -8,20 +8,21 @@ import java.util.Scanner;
 public class Manager{
     ArrayList<Manageable> mList = new ArrayList<>();
 
-    Manageable find(String kwd) {
-        Manageable m = null;
+    String kwd;
 
+    void find(String kwd) {
         for (var i : mList) {
             if(i.matches(kwd)) {
-                m = i;
+                i.print();
             }
         }
-
-        return m;
     }
 
     public void search(Scanner scan) {
-
+        do {
+            kwd = scan.next();
+            find(kwd);
+        } while (!kwd.equals("exit"));
     }
 
     public void readAll(String fileName, Factory fac) {

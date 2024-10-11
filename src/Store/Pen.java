@@ -1,4 +1,4 @@
-package src.Lecture4;
+package src.Store;
 
 import src.Manager.Manageable;
 
@@ -18,11 +18,11 @@ public class Pen implements Manageable {
 
     @Override
     public void print() {
-        System.out.printf("[Pen] %s (%fmm) %d원\n", itemName, mmThick, price);
+        System.out.printf("[Pen] %s (%.2fmm) %d원\n", itemName, mmThick, price);
     }
 
     @Override
     public boolean matches(String kwd) {
-        return false;
+        return kwd.equals(itemName) || kwd.equals(mmThick + "");
     }
 }

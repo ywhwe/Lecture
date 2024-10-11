@@ -1,12 +1,9 @@
 package src.Student;
 
-import src.Lecture4.BookStore;
 import src.Manager.Factory;
 import src.Manager.Manageable;
 import src.Manager.Manager;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 

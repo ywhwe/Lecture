@@ -1,4 +1,4 @@
-package src.Lecture4;
+package src.Store;
 
 import src.Manager.Manageable;
 
@@ -25,6 +25,7 @@ public class Book implements Manageable {
         }
 
         price = scan.nextInt();
+
     }
 
     String getBookType() {
@@ -32,7 +33,7 @@ public class Book implements Manageable {
     }
 
     public void print() {
-        System.out.printf("%s %s (%s/%s/%d년)[%d원] 저자:",getBookType(), title, pub, isbn, year, price);
+        System.out.printf("%s %s (%s/%s/%d년) [%d원] 저자:",getBookType(), title, pub, isbn, year, price);
         for (String a : authors) {
             System.out.printf(" %s ", a);
         }
@@ -40,6 +41,6 @@ public class Book implements Manageable {
     }
 
     public boolean matches(String kwd) {
-        return title.equals(kwd);
+        return title.contains(kwd);
     }
 }

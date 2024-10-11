@@ -1,4 +1,4 @@
-package src.Lecture4;
+package src.Store;
 
 import src.Manager.Manageable;
 
@@ -18,11 +18,11 @@ public class Tissue implements Manageable {
 
     @Override
     public void print() {
-        System.out.printf("%s (%d장) [%d원]", tissueName, nSheets, price);
+        System.out.printf("%s (%d장) [%d원]\n", tissueName, nSheets, price);
     }
 
     @Override
     public boolean matches(String kwd) {
-        return false;
+        return kwd.equals(tissueName);
     }
 }

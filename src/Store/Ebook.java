@@ -1,4 +1,4 @@
-package src.Lecture4;
+package src.Store;
 
 import java.util.*;
 
@@ -10,7 +10,7 @@ public class Ebook extends Book {
     public void read(Scanner scan) {
         super.read(scan);
 
-        url = scan.next();
+        url = scan.next().replaceAll(" {2}", "");
         format = scan.next();
     }
 

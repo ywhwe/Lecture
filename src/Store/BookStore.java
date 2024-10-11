@@ -1,13 +1,14 @@
-package src.Lecture4;
+package src.Store;
 
 import src.Manager.Factory;
 import src.Manager.Manageable;
 import src.Manager.Manager;
 
 import java.util.*;
+import java.nio.charset.*;
 
 public class BookStore extends Manager implements Factory {
-    Scanner scan = new Scanner(System.in);
+    Scanner scan = new Scanner(System.in, Charset.forName("EUC-KR"));
 
     public static void main(String[] args) {
         BookStore main = new BookStore();
@@ -15,7 +16,7 @@ public class BookStore extends Manager implements Factory {
     }
 
     void newMain() {
-        readAll("book2.txt", this);
+        readAll("book4.txt", this);
         printAll();
         search(scan);
     }
