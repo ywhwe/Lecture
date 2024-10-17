@@ -1,8 +1,6 @@
 package src.Practice;
 
-import java.lang.reflect.Array;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class CutLine {
     public static void main(String[] args) {
@@ -16,10 +14,10 @@ public class CutLine {
         ArrayList<Integer> arr = new ArrayList<>();
         ArrayList<Integer> res = new ArrayList<>();
 
-        int num, pri, temp, min;
+        int num, passed, temp, min;
 
         num = scanner.nextInt();
-        pri = scanner.nextInt();
+        passed = scanner.nextInt();
 
         for (int i = 0; i < num; i++) {
             temp = scanner.nextInt();
@@ -30,13 +28,13 @@ public class CutLine {
 
         temp = num - 1;
 
-        for (int i = 0; i < pri; i++) {
+        for (int i = 0; i < passed; i++) {
             res.add(arr.get(temp));
 
             temp -= 1;
         }
 
-        min = res.get(pri-1);
+        min = res.get(passed-1);
 
         System.out.print(min);
     }
