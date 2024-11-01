@@ -10,29 +10,23 @@ public class TeamMgr {
 	static Manager memberMgr = new Manager();
 
 	void myMain() {
-		memberMgr.readAll("members.txt", new MemberFactory());
-		teamMgr.readAll("teams.txt", new TeamFactory());
+		memberMgr.readAll("members.txt", new Factory() {
+			@Override
+			public Manageable create(Scanner scan) {
+				int n = scan.nextInt();
+				if (n == 1) return new Member();
+				if (n == 2) return new NMember();
+				return null;
+			}
+		});
+		teamMgr.readAll("teams.txt", new Factory() {
+			@Override
+			public Manageable create(Scanner scan) {
+				return new Team();
+			}
+		});
 		teamMgr.printAll();
 		askSameTeam();
-	}
-
-	static class MemberFactory implements Factory {
-
-		@Override
-		public Manageable create(Scanner scan) {
-			int n = scan.nextInt();
-			if (n == 1) return new Member();
-			if (n == 2) return new NMember();
-			return null;
-		}
-	}
-
-	static class TeamFactory implements Factory {
-
-		@Override
-		public Manageable create(Scanner scan) {
-			return new Team();
-		}
 	}
 
 	void askSameTeam() {
