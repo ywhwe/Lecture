@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Manager{
-    ArrayList<Manageable> mList = new ArrayList<>();
+    public ArrayList<Manageable> mList = new ArrayList<>();
 
     String kwd;
 
