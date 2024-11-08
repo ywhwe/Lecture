@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import src.mgr.Manageable;
 
-public class Student implements Manageable {
+public class Student implements Manageable, Comparable<Student> {
 	int id;
 	String name;
 	String phone;
@@ -62,5 +62,10 @@ public class Student implements Manageable {
 				return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int compareTo(Student o) {
+		return name.compareTo(o.name);
 	}
 }

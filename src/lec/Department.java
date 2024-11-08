@@ -1,5 +1,8 @@
 package src.lec;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import src.mgr.Manager;
@@ -12,8 +15,31 @@ public class Department{
 	void mymain() {
 		lecMgr.readAll("lecture.txt", Lecture::new);
 		lecMgr.printAll();
+
+		System.out.println("===================== 코드순 =====================");
+		lecMgr.printAllSortBy(new Comparator<Lecture>(){
+
+			@Override
+			public int compare(Lecture o1, Lecture o2) {
+				return o1.code.compareTo(o2.code);
+			}
+		});
+
+		System.out.println("===================== 이름순 =====================");
+		lecMgr.printAllSortBy(new Comparator<Lecture>(){
+
+			@Override
+			public int compare(Lecture o1, Lecture o2) {
+				return o1.name.compareTo(o2.name);
+			}
+		});
 		stMgr.readAll("student.txt", Student::new);
 		stMgr.printAll();
+		ArrayList<Student> newList = new ArrayList<>(stMgr.mList);
+		Collections.sort(newList);
+		for (Student s : newList) {
+			s.printStudent();
+		}
 		searchMenu();
 	}
 

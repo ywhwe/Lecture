@@ -2,6 +2,8 @@ package src.mgr;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Manager <T extends Manageable>{
@@ -58,5 +60,13 @@ public class Manager <T extends Manageable>{
 
 	public void addElement(T e) {
 		mList.add(e);
+	}
+
+	public void printAllSortBy(Comparator<T> comp) {
+		ArrayList<T> sorted = new ArrayList<>(mList);
+		Collections.sort(sorted, comp);
+		for (T m : sorted) {
+			m.print();
+		}
 	}
 }
