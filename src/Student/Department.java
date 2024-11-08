@@ -15,13 +15,13 @@ public class Department extends Manager implements Factory {
 	void run() {
 		readLectures();
 		printLectures();
-		readAll("student.txt", this);
+		readAll("student1.txt", this);
 		printAll();
 		search(scan);
 	}
 
 	void readLectures() {
-		Scanner filein = openFile("lecture.txt");
+		Scanner filein = openFile("lecture1.txt");
 		Lecture lec = null;
 		while (filein.hasNext()) {
 			lec = new Lecture();
