@@ -12,7 +12,7 @@ public class Department{
 	Manager<Student> stMgr = new Manager<>();
 	static Manager<Lecture> lecMgr = new Manager<>();
 
-	void mymain() {
+	void myMain() {
 		lecMgr.readAll("lecture.txt", Lecture::new);
 		lecMgr.printAll();
 
@@ -68,7 +68,7 @@ public class Department{
 
 	public static void main(String[] args) {
 		Department dpt = new Department();
-		dpt.mymain();
+		dpt.myMain();
 	}
 
 	static public Lecture findLecture(String code) {
