@@ -1,6 +1,6 @@
 package src.Manager;
 
-import java.util.*;
+import java.util.Scanner;
 
 public interface Manageable {
     void read(Scanner scan);

@@ -1,8 +1,8 @@
-package src.lec;
+package src.Department;
 
 import java.util.Scanner;
 
-import src.mgr.Manageable;
+import src.Manager.Manageable;
 
 public class Lecture implements Manageable {
 	String code;

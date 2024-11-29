@@ -1,11 +1,11 @@
-package src.lec;
+package src.Department;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
 
-import src.mgr.Manager;
+import src.Manager.Manager;
 
 public class Department{
 	Scanner scan = new Scanner(System.in);

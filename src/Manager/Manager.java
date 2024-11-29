@@ -1,59 +1,72 @@
 package src.Manager;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
-public class Manager{
-    public ArrayList<Manageable> mList = new ArrayList<>();
+public class Manager <T extends Manageable>{
+	public ArrayList<T> mList = new ArrayList<>();
 
-    String kwd;
+	public T find(String kwd) {
+		for (T m : mList)
+			if (m.matches(kwd))
+				return m;
+		return null;
+	}
 
-    void find(String kwd) {
-        for (var i : mList) {
-            if(i.matches(kwd)) {
-                i.print();
-            }
-        }
-    }
+	public void readAll(String filename, Factory<T> fac) {
+		Scanner filein = openFile(filename);
+		T m = null;
+		while (filein.hasNext()) {
+			m = fac.create();
+			m.read(filein);
+			mList.add(m);
+		}
+		filein.close();
+	}
 
-    public void search(Scanner scan) {
-        do {
-            kwd = scan.next();
-            find(kwd);
-        } while (!kwd.equals("exit"));
-    }
+	public void printAll() {
+		for (T m : mList) {
+			m.print();
+		}
+	}
 
-    public void readAll(String fileName, Factory fac) {
-        Scanner filein = openFile(fileName);
-        while (filein.hasNext()) {
+	public void search(Scanner keyScanner) {
+		String kwd = null;
+		while (true) {
+			System.out.print(">> ");
+			kwd = keyScanner.next();
+			if (kwd.equals("end"))
+				break;
+			for (T m : mList) {
+				if (m.matches(kwd))
+					m.print();
+			}
+		}
+	}
 
-            Manageable m;
+	public Scanner openFile(String filename) {
+		Scanner filein = null;
+		try {
+			filein = new Scanner(new File(filename));
+		} catch (Exception e) {
+			System.out.println(filename + ": 파일 없음");
+			System.exit(0);
+		}
+		return filein;
+	}
 
-            m = fac.create(filein);
-            m.read(filein);
+	public void addElement(T e) {
+		mList.add(e);
+	}
 
-            mList.add(m);
-        }
-
-        filein.close();
-    }
-
-    public void printAll() {
-        for(Manageable m : mList) {
-            m.print();
-        }
-    }
-
-    public Scanner openFile(String filename) {
-        Scanner filein = null;
-        try {
-            filein = new Scanner(new File(filename));
-        } catch (IOException e) {
-            System.out.println("File open failed : " + filename);
-            throw new RuntimeException(e);
-        }
-        return filein;
-    }
+	public void printAllSortBy(Comparator<T> comp) {
+		ArrayList<T> sorted = new ArrayList<>(mList);
+		Collections.sort(sorted, comp);
+		for (T m : sorted) {
+			m.print();
+		}
+	}
 }

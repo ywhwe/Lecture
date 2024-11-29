@@ -1,9 +1,9 @@
-package src.lec;
+package src.Department;
 
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import src.mgr.Manageable;
+import src.Manager.Manageable;
 
 public class Student implements Manageable, Comparable<Student> {
 	int id;
